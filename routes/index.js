@@ -40,7 +40,9 @@ router.get('/todayreaded', function(req, res, next) {
 			if(content == null){
 				res.end("error");
 	    }else{
-				content.readed = !content.readed;//取反，方便可以点赞或者取消点赞
+	    	if(content.readed != true){ //如果已经是已阅状态则跳过
+	    		content.readed = true;
+	    	}
 				content.save(function(err) {
 					if (err) {
 						console.log('阅读失败');
